@@ -113,6 +113,24 @@ pub fn SpecializeOn(comptime Real: type) type {
                         Self.zero;
                 }
 
+                /// applies components-wise floor values
+                pub fn floor(vec: Self) Self {
+                    var result: Self = undefined;
+                    inline for (@typeInfo(Self).Struct.fields) |fld| {
+                        @field(result, fld.name) = @floor(@field(vec, fld.name));
+                    }
+                    return result;
+                }
+
+                /// applies components-wise ceil values
+                pub fn ceil(vec: Self) Self {
+                    var result: Self = undefined;
+                    inline for (@typeInfo(Self).Struct.fields) |fld| {
+                        @field(result, fld.name) = @ceil(@field(vec, fld.name));
+                    }
+                    return result;
+                }
+
                 /// applies component-wise absolute values
                 pub fn abs(a: Self) Self {
                     var result: Self = undefined;
