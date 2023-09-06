@@ -140,6 +140,15 @@ pub fn SpecializeOn(comptime Real: type) type {
                     return result;
                 }
 
+                /// negates all components of `vec`
+                pub fn neg(vec: Self) Self {
+                    var result: Self = undefined;
+                    inline for (@typeInfo(Self).Struct.fields) |fld| {
+                        @field(result, fld.name) = -@field(vec, fld.name);
+                    }
+                    return result;
+                }
+
                 /// swizzle vector fields into a new vector type.
                 /// swizzle("xxx") will return a Vec3 with three times the x component.
                 /// swizzle will return a vector or scalar type with the same number of components as the
