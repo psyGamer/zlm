@@ -264,6 +264,10 @@ pub fn SpecializeOn(comptime Real: type) type {
                 };
             }
 
+            pub fn splat(x: Real) Self {
+                return Self.new(x, x);
+            }
+
             pub fn format(value: Self, comptime _: []const u8, _: std.fmt.FormatOptions, stream: anytype) !void {
                 try stream.print("vec2({d:.2}, {d:.2})", .{ value.x, value.y });
             }
@@ -318,6 +322,10 @@ pub fn SpecializeOn(comptime Real: type) type {
                     .y = y,
                     .z = z,
                 };
+            }
+
+            pub fn splat(x: Real) Self {
+                return Self.new(x, x, x);
             }
 
             pub fn format(value: Self, comptime _: []const u8, _: std.fmt.FormatOptions, stream: anytype) !void {
@@ -426,6 +434,10 @@ pub fn SpecializeOn(comptime Real: type) type {
                     .z = z,
                     .w = w,
                 };
+            }
+
+            pub fn splat(x: Real) Self {
+                return Self.new(x, x, x, x);
             }
 
             pub fn format(value: Self, comptime _: []const u8, _: std.fmt.FormatOptions, stream: anytype) !void {
